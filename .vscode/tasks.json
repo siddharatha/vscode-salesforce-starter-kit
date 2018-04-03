@@ -2,22 +2,45 @@
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
     "version": "2.0.0",
-    "tasks": [
+    "tasks": [                       
         {
+            "label": "GMC",
             "type": "shell",
-            "label": "compress All",
-            "command": "sh ./scripts/compress.sh",
+            "command": "time sh ./scripts/getMyChanges.sh",
+            "isBackground": true,
+            "presentation": {
+                "echo": false,
+                "reveal": "never",
+                "focus": false,
+                "panel": "new"
+            }            
+        },
+        {
+            "label": "DB",
+            "type": "shell",
+            "command": "time sh ./scripts/downloadBranch.sh",
+            "isBackground": true,
             "presentation": {
                 "echo": true,
                 "reveal": "always",
                 "focus": false,
-                "panel": "shared"
-            },
-            "promptOnClose": true,
-            "isBackground": true
+                "panel": "new"
+            }           
         },
         {
-            "label": "compress single",
+            "label": "M&S",            
+            "type": "shell",
+            "command": "node ./scripts/mergeFiles.js \"${relativeFile}\" \"${fileDirname}\"",
+            "isBackground": true,
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            }  
+        },
+        {
+            "label": "CS",
             "type": "shell",
             "command": "echo 'processing \"${file}\"' && perl -i.bak -p scripts/profileCompress.pl \"${file}\" > .ignore && rm \"${file}\".bak && echo 'done'",
             "isBackground": true,
@@ -29,7 +52,7 @@
             }
         },
         {
-            "label": "just-true single",
+            "label": "JT",
             "type": "shell",
             "command": "echo 'processing \"${file}\"' && perl -i.bak -p scripts/profileCompress.pl \"${file}\" > .ignore && perl -i.bak -p scripts/removeFalseValues.pl \"${file}\" > .ignore && rm \"${file}.bak\" > .ignore && echo 'done'",
             "isBackground": true,
@@ -41,7 +64,21 @@
             }
         },
         {
-            "label": "just-true all",
+            "type": "shell",
+            "label": "CS-A",
+            "command": "sh ./scripts/compress.sh",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "promptOnClose": true,
+            "isBackground": true,
+            "showInStatusBar":false
+        },
+        {
+            "label": "JT-A",
             "type": "shell",
             "command": "sh ./scripts/justtrue.sh",
             "isBackground": true,
@@ -50,31 +87,8 @@
                 "reveal": "never",
                 "focus": false,
                 "panel": "new"
-            }
-        },
-        {
-            "label": "get my changes",
-            "type": "shell",
-            "command": "time sh ./scripts/getMyChanges.sh",
-            "isBackground": true,
-            "presentation": {
-                "echo": false,
-                "reveal": "never",
-                "focus": false,
-                "panel": "new"
-            }
-        },
-        {
-            "label": "Get branch",
-            "type": "shell",
-            "command": "time sh ./scripts/downloadBranch.sh",
-            "isBackground": true,
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": false,
-                "panel": "new"
-            }           
+            },
+            "showInStatusBar":false
         }
     ]
 }
