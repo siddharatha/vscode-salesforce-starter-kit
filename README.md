@@ -10,6 +10,10 @@ I will try to summarize series of commands you can run without using command lin
 - Create and Navigate to a new folder in vscode where you would have your development and a combined repo that manages entire metadata.
 > cmd + shift + p (mac) / ctrl + shift + p (windows) - this is your place holder to enter commands - we refer to this as command-pallete in this readme.
 
+## Step-2 (with release candidate)
+
+- [Download Release](https://github.com/siddharatha/vscode-salesforce-starter-kit/releases/download/0.1/source.zip)
+- Open the folder in vscode and proceed. You can avoid the next step which involves a clone of this repo.
 ## Step-2 
 - open command-pallete and type git:clone
     - specify this url : https://github.com/siddharatha/vscode-starter-kit.git
